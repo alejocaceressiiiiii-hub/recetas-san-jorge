@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="es-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="showroom">
+  <title>Mermeladas San Jorge — Sabores, Presentaciones y Recetas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Showroom) */
+      --background: #fbfbfd;
+      --surface-container-low: #f5f5f7;
+      --surface-container: #e8e8ed;
+      --surface-container-high: #dcdce1;
+
+      /* Ink */
+      --on-surface: #1d1d1f;
+      --on-surface-variant: #6e6e73;
+
+      /* Rules */
+      --outline: #d2d2d7;
+      --outline-variant: #e5e5ea;
+
+      /* Brand & Accents (San Jorge official corporate blue + Showroom hierarchy) */
+      --primary: #004691;
+      --primary-hover: #003570;
+      --on-primary: #ffffff;
+      --primary-container: #e8f1fd;
+      --on-primary-container: #003570;
+      --secondary: #b8293d;
+      --tertiary: #1d1d1f;
+      --error: #d70015;
+      --on-error: #ffffff;
+
+      /* Official emblem & header tokens */
+      --brand-yellow: #ffd100;
+      --brand-yellow-soft: #fff6c2;
+      --brand-blue-ink: #003570;
+      --brand-leaf-green: #248a3d;
+      --header-muted: #d6e4f7;
+      --header-surface: rgba(255, 255, 255, 0.14);
+      --header-surface-hover: rgba(255, 255, 255, 0.24);
+      --header-border: rgba(255, 255, 255, 0.28);
+      --header-input-bg: #ffffff;
+
+      /* Official flavor palette (Fresa, Durazno, Mora, Frutos Rojos, Piña) */
+      --flavor-fresa: #c8233c;
+      --flavor-fresa-soft: #fdebed;
+      --flavor-fresa-ink: #8a1224;
+
+      --flavor-durazno: #d97706;
+      --flavor-durazno-soft: #fff3e0;
+      --flavor-durazno-ink: #8a4600;
+
+      --flavor-mora: #6b2467;
+      --flavor-mora-soft: #f5eaf4;
+      --flavor-mora-ink: #4d154a;
+
+      --flavor-frutos: #9b1b42;
+      --flavor-frutos-soft: #fbeaf0;
+      --flavor-frutos-ink: #6e0f2c;
+
+      --flavor-pina: #c98f00;
+      --flavor-pina-soft: #fff8de;
+      --flavor-pina-ink: #704e00;
+
+      /* Packaging SVG illustration tokens */
+      --pack-pouch-base: #ffffff;
+      --pack-pouch-shade: #e2e6ee;
+      --pack-pouch-stroke: #c4cbd8;
+      --pack-glass-base: #eef3f9;
+      --pack-glass-shine: rgba(255, 255, 255, 0.72);
+      --pack-lid-gold: #cfa33a;
+      --pack-lid-dark: #9c7519;
+
+      /* Semantic */
+      --positive: #1f7a36;
+      --positive-soft: #e6f4ea;
+      --warning: #9a5b00;
+      --focus: #004691;
+      --focus-on-dark: #ffd100;
+
+      /* Data series */
+      --data-1: #004691;
+      --data-2: #c8233c;
+      --data-3: #d97706;
+      --data-4: #6b2467;
+      --data-context: #aeaeb2;
+
+      /* Fonts */
+      --font-headline: 'Inter Tight', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-label: 'Inter', sans-serif;
+
+      /* Shape */
+      --rounded: 9999px;
+      --rounded-md: 0.875rem;
+      --rounded-lg: 1.25rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --headline-tracking: -0.035em;
+      --subhead-tracking: -0.02em;
+      --figure-tracking: -0.03em;
+      --tile-shadow-hover: 0 8px 28px rgba(0, 0, 0, 0.08);
+      --header-shadow: 0 4px 20px rgba(0, 35, 80, 0.16);
+      --focus-ring-light: 0 0 0 3px rgba(0, 70, 145, 0.28);
+      --focus-ring-dark: 0 0 0 3px rgba(255, 209, 0, 0.85);
+      --chevron: " \203A";
+
+      /* Type scale (Narrative) */
+      --display-size:  clamp(2.5rem, 1.5rem + 3.8vw, 4.25rem);
+      --headline-size: clamp(1.875rem, 1.25rem + 2.1vw, 2.75rem);
+      --subhead-size:  clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --body-size:     clamp(1.0625rem, 1rem + 0.22vw, 1.125rem);
+      --label-size:    clamp(0.75rem, 0.72rem + 0.14vw, 0.8125rem);
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 5.5rem;
+
+      /* Motion */
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.58;
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+
+    button, input, select {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding-inline: var(--space-lg);
+    }
+    .container * { min-width: 0; }
+
+    /* Official Blue Brand Header */
+    .brand-header {
+      background: var(--primary);
+      color: var(--on-primary);
+      box-shadow: var(--header-shadow);
+      padding-block: var(--space-md);
+    }
+
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md) var(--space-lg);
+    }
+
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-md);
+      text-decoration: none;
+      color: var(--on-primary);
+      min-height: 44px;
+    }
+    .brand-lockup:focus-visible {
+      outline: 2px solid var(--focus-on-dark);
+      outline-offset: 3px;
+      border-radius: var(--rounded-md);
+    }
+
+    .brand-sub {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .brand-sub-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: var(--subhead-tracking);
+      color: var(--on-primary);
+    }
+    .brand-sub-tag {
+      font-size: var(--label-size);
+      color: var(--header-muted);
+      font-weight: 500;
+    }
+
+    .brand-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .brand-nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      color: var(--on-primary);
+      text-decoration: none;
+      font-family: var(--font-label);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      transition: background-color var(--dur-short) var(--ease-out);
+    }
+    .brand-nav a:hover {
+      background: var(--header-surface);
+    }
+    .brand-nav a:focus-visible {
+      outline: 2px solid var(--focus-on-dark);
+      outline-offset: 2px;
+    }
+
+    /* Search control inside header (with visible label above input) */
+    .header-search {
+      display: flex;
+      align-items: end;
+      gap: var(--space-sm);
+    }
+    .search-field-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .search-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      color: var(--header-muted);
+      line-height: 1.1;
+    }
+    .search-input-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-input {
+      width: 220px;
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-xl) var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--header-border);
+      background: var(--header-input-bg);
+      color: var(--on-surface);
+      font-size: 0.9375rem;
+      transition: box-shadow var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+    }
+    .search-input::placeholder {
+      color: var(--on-surface-variant);
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--brand-yellow);
+      box-shadow: var(--focus-ring-dark);
+    }
+    .search-clear-btn {
+      position: absolute;
+      right: 4px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: var(--rounded);
+      background: transparent;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+    }
+    .search-clear-btn.is-visible {
+      display: inline-flex;
+    }
+    .search-clear-btn:hover {
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+    .search-submit-btn {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border: 0;
+      border-radius: var(--rounded);
+      background: var(--brand-yellow);
+      color: var(--brand-blue-ink);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-short) var(--ease-out);
+    }
+    .search-submit-btn:hover {
+      background: var(--brand-yellow-soft);
+    }
+    .search-submit-btn:focus-visible {
+      outline: 2px solid var(--on-primary);
+      outline-offset: 2px;
+    }
+
+    /* Live Search Results Banner */
+    .search-results-bar {
+      display: none;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      padding-block: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .search-results-bar.is-open {
+      display: block;
+    }
+    .search-results-inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .search-results-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .search-results-title {
+      margin: 0;
+      font-size: 0.9375rem;
+      font-weight: 600;
+    }
+    .search-results-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .search-hit-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--background);
+      color: var(--on-surface);
+      border: 0;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: box-shadow var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    }
+    .search-hit-pill:hover {
+      box-shadow: var(--tile-shadow-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Tonal Bands (Showroom Treatment #4) */
+    .band {
+      padding-block: var(--space-2xl);
+      background: var(--background);
+    }
+    .band.alt {
+      background: var(--surface-container-low);
+    }
+    .band.alt .tile {
+      background: var(--background);
+    }
+    .hero-band {
+      padding-block: var(--space-xl) var(--space-2xl);
+    }
+
+    /* Centered Headline Stack (Showroom Treatment #1) */
+    .headline-stack {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    .eyebrow {
+      display: inline-block;
+      margin: 0 0 var(--space-sm);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--secondary);
+    }
+    .headline-stack h1 {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 700;
+      letter-spacing: var(--headline-tracking);
+      line-height: 1.05;
+      color: var(--on-surface);
+    }
+    .headline-stack h2 {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 700;
+      letter-spacing: var(--subhead-tracking);
+      line-height: 1.08;
+      color: var(--on-surface);
+    }
+    .headline-stack .lede {
+      margin: var(--space-md) auto 0;
+      max-width: 54ch;
+      color: var(--on-surface-variant);
+      font-size: var(--subhead-size);
+      line-height: 1.45;
+      font-weight: 400;
+    }
+
+    /* Pill Actions & Chevron Links (Showroom Treatment #3) */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md) var(--space-lg);
+      margin-top: var(--space-lg);
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--rounded);
+      border: 0;
+      background: var(--primary);
+      color: var(--on-primary);
+      font-family: var(--font-label);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color var(--dur-short) var(--ease-out);
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--rounded);
+      border: 0;
+      background: var(--surface-container);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--dur-short) var(--ease-out);
+    }
+    .btn-secondary:hover {
+      background: var(--surface-container-high);
+    }
+    .link-more {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    .link-more::after {
+      content: var(--chevron);
+      margin-left: var(--space-xs);
+    }
+    .link-more:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Borderless Rounded Tiles (Showroom Treatment #2) */
+    .tile {
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl) var(--space-lg);
+      border: 0;
+    }
+    .tile.is-interactive {
+      cursor: pointer;
+      transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
+    }
+    .tile.is-interactive:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--tile-shadow-hover);
+    }
+    .tile.is-selected {
+      box-shadow: inset 0 0 0 2px var(--primary), var(--tile-shadow-hover);
+    }
+
+    /* Interactive Hero Stage */
+    .stage-tile {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+      gap: var(--space-xl);
+      align-items: center;
+      padding: var(--space-xl);
+    }
+
+    .stage-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--background);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl) var(--space-lg);
+      min-height: 360px;
+      position: relative;
+    }
+
+    .stage-caption-pill {
+      margin-top: var(--space-md);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--surface-container-low);
+      color: var(--on-surface-variant);
+      font-size: 0.875rem;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stage-controls {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .control-group-label {
+      margin: 0 0 var(--space-sm);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .selector-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      border: 0;
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+    .selector-pill:hover {
+      background: var(--surface-container);
+    }
+    .selector-pill[aria-pressed="true"] {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .flavor-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: var(--rounded-full);
+      flex-shrink: 0;
+    }
+    .dot-fresa { background: var(--flavor-fresa); }
+    .dot-durazno { background: var(--flavor-durazno); }
+    .dot-mora { background: var(--flavor-mora); }
+    .dot-frutos { background: var(--flavor-frutos); }
+    .dot-pina { background: var(--flavor-pina); }
+
+    .selector-pill[aria-pressed="true"] .flavor-dot {
+      box-shadow: 0 0 0 2px var(--on-primary);
+    }
+
+    .stage-readout {
+      background: var(--background);
+      border-radius: var(--rounded-md);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .stage-readout-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      letter-spacing: var(--subhead-tracking);
+      color: var(--on-surface);
+    }
+    .stage-readout-desc {
+      margin: 0;
+      color: var(--on-surface-variant);
+      font-size: 0.96875rem;
+      max-width: 58ch;
+    }
+    .stage-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Flavors Grid */
+    .flavors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+
+    .flavor-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      gap: var(--space-sm);
+      padding: var(--space-lg);
+      width: 100%;
+    }
+    .flavor-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+    .badge-fresa { background: var(--flavor-fresa-soft); color: var(--flavor-fresa-ink); }
+    .badge-durazno { background: var(--flavor-durazno-soft); color: var(--flavor-durazno-ink); }
+    .badge-mora { background: var(--flavor-mora-soft); color: var(--flavor-mora-ink); }
+    .badge-frutos { background: var(--flavor-frutos-soft); color: var(--flavor-frutos-ink); }
+    .badge-pina { background: var(--flavor-pina-soft); color: var(--flavor-pina-ink); }
+
+    .flavor-card h3 {
+      margin: var(--space-xs) 0 0;
+      font-family: var(--font-headline);
+      font-size: 1.375rem;
+      font-weight: 700;
+      letter-spacing: var(--subhead-tracking);
+      color: var(--on-surface);
+    }
+    .flavor-card p {
+      margin: 0;
+      color: var(--on-surface-variant);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+    .flavor-card-action {
+      margin-top: auto;
+      padding-top: var(--space-sm);
+      color: var(--primary);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    /* Presentations Grid + Comparison Table */
+    .presentations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+    .card-wrapper { container-type: inline-size; }
+
+    .pres-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      padding: var(--space-lg);
+      height: 100%;
+    }
+    .pres-weight {
+      font-family: var(--font-headline);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: var(--figure-tracking);
+      line-height: 1.1;
+      color: var(--on-surface);
+      font-variant-numeric: tabular-nums;
+    }
+    .pres-type {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .pres-desc {
+      margin: 0;
+      color: var(--on-surface-variant);
+      font-size: 0.9375rem;
+    }
+    .pres-servings {
+      margin-top: auto;
+      padding-top: var(--space-sm);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .table-tile {
+      padding: var(--space-lg);
+      overflow-x: auto;
+    }
+    .table-title {
+      margin: 0 0 var(--space-md);
+      font-family: var(--font-headline);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: var(--subhead-tracking);
+    }
+    table.spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9375rem;
+    }
+    .spec-table th {
+      font-family: var(--font-label);
+      font-weight: 500;
+      color: var(--on-surface-variant);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      white-space: nowrap;
+    }
+    .spec-table td {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      color: var(--on-surface);
+      font-variant-numeric: tabular-nums;
+    }
+    .spec-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    /* Quality & Key Figures */
+    .figures-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+    .tile.figure {
+      text-align: center;
+      padding: var(--space-lg);
+    }
+    .tile.figure .label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+    }
+    .tile.figure .value {
+      margin-top: var(--space-xs);
+      font-family: var(--font-headline);
+      font-size: clamp(2rem, 1.5rem + 1.8vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: var(--figure-tracking);
+      line-height: 1.1;
+      color: var(--on-surface);
+      font-variant-numeric: tabular-nums;
+    }
+    .tile.figure .caption {
+      margin-top: var(--space-xs);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .pillar-card h3 {
+      margin: 0 0 var(--space-sm);
+      font-family: var(--font-headline);
+      font-size: 1.375rem;
+      font-weight: 700;
+      letter-spacing: var(--subhead-tracking);
+      color: var(--on-surface);
+    }
+    .pillar-card p {
+      margin: 0;
+      color: var(--on-surface-variant);
+      max-width: 52ch;
+    }
+    .pillar-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--rounded-md);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Recipes Catalog & Interactive Detail */
+    .recipe-filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xl);
+    }
+    .filter-pill {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      border: 0;
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+    }
+    .filter-pill:hover {
+      background: var(--surface-container);
+    }
+    .filter-pill[aria-pressed="true"] {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .recipes-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-xl);
+    }
+    .recipes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .recipe-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      padding: var(--space-lg);
+      text-align: left;
+      width: 100%;
+    }
+    .recipe-meta-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-xs);
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+      font-weight: 500;
+    }
+    .recipe-card h3 {
+      margin: var(--space-xs) 0 0;
+      font-family: var(--font-headline);
+      font-size: 1.375rem;
+      font-weight: 700;
+      letter-spacing: var(--subhead-tracking);
+      color: var(--on-surface);
+    }
+    .recipe-card p {
+      margin: 0;
+      color: var(--on-surface-variant);
+      font-size: 0.9375rem;
+    }
+    .recipe-pairing {
+      margin-top: auto;
+      padding-top: var(--space-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .recipe-open-label {
+      color: var(--primary);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    /* Inline Expanded Recipe Reader */
+    .recipe-detail-panel {
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    .recipe-detail-header {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+    .recipe-detail-title {
+      margin: var(--space-xs) 0 0;
+      font-family: var(--font-headline);
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      letter-spacing: var(--subhead-tracking);
+    }
+    .portion-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .portion-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+    }
+    .portion-btn {
+      min-width: 44px;
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border: 0;
+      border-radius: var(--rounded);
+      background: var(--background);
+      color: var(--on-surface);
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .portion-btn[aria-pressed="true"] {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .ingredient-list {
+      list-style: none;
+      margin: var(--space-sm) 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .ingredient-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--background);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded-md);
+      font-size: 0.9375rem;
+    }
+    .ingredient-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .ingredient-item.is-checked span {
+      text-decoration: line-through;
+      color: var(--on-surface-variant);
+    }
+
+    .steps-list {
+      margin: var(--space-sm) 0 0;
+      padding-left: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      color: var(--on-surface);
+    }
+    .steps-list li {
+      padding-left: var(--space-xs);
+    }
+    .detail-subhead {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+
+    .empty-state {
+      display: none;
+      text-align: center;
+      padding: var(--space-xl);
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+    }
+    .empty-state.is-visible {
+      display: block;
+    }
+
+    /* Footer */
+    .site-footer {
+      background: var(--primary);
+      color: var(--on-primary);
+      padding-block: var(--space-2xl) var(--space-xl);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--header-border);
+    }
+    .footer-heading {
+      margin: 0 0 var(--space-sm);
+      font-family: var(--font-headline);
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--on-primary);
+    }
+    .footer-text {
+      margin: 0 0 var(--space-xs);
+      color: var(--header-muted);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+    }
+    .footer-bottom {
+      padding-top: var(--space-lg);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      color: var(--header-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Scroll Reveal */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity var(--dur-long) var(--ease-out), transform var(--dur-long) var(--ease-out);
+    }
+    .reveal-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Container query & Responsive */
+    @container (min-width: 340px) {
+      .pres-card-inner {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: start;
+        gap: var(--space-sm);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .stage-tile {
+        grid-template-columns: 1fr;
+      }
+      .recipe-detail-panel {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .brand-nav {
+        justify-content: flex-start;
+      }
+      .header-search {
+        width: 100%;
+      }
+      .search-field-wrap {
+        flex: 1 1 auto;
+      }
+      .search-input {
+        width: 100%;
+      }
+      .band {
+        padding-block: var(--space-xl);
+      }
+      .stage-tile,
+      .recipe-detail-panel {
+        padding: var(--space-lg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration:  0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior:     auto !important;
+      }
+      .reveal-item {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado oficial azul con logo amarillo de óvalo/hoja y letras azules "San Jorge", barra de navegación y buscador -->
+  <header class="brand-header" id="inicio">
+    <div class="container header-inner">
+      <a href="#inicio" class="brand-lockup" aria-label="Inicio — Mermeladas San Jorge">
+        <svg width="136" height="62" viewBox="0 0 136 62" role="img" aria-label="Logo oficial San Jorge">
+          <!-- Hoja / óvalo amarillo inclinado con doble filete -->
+          <g transform="translate(68 31) rotate(-6)">
+            <ellipse cx="0" cy="0" rx="62" ry="25" fill="var(--on-primary)" />
+            <ellipse cx="0" cy="0" rx="59" ry="22.5" fill="var(--brand-yellow)" stroke="var(--brand-blue-ink)" stroke-width="1.8" />
+            <!-- Punta estilizada de hoja -->
+            <path d="M 46 -12 Q 58 -14 60 -2 Q 52 2 45 -5 Z" fill="var(--brand-leaf-green)" opacity="0.92" />
+            <text x="-2" y="7" text-anchor="middle" fill="var(--brand-blue-ink)" font-family="Inter Tight, Inter, sans-serif" font-weight="800" font-style="italic" font-size="20" letter-spacing="-0.6">San Jorge</text>
+          </g>
+        </svg>
+        <span class="brand-sub">
+          <span class="brand-sub-title">Mermeladas</span>
+          <span class="brand-sub-tag">Pulpa de fruta natural</span>
+        </span>
+      </a>
+
+      <nav class="brand-nav" aria-label="Navegación principal">
+        <a href="#sabores">Sabores</a>
+        <a href="#presentaciones">Presentaciones</a>
+        <a href="#calidad">Calidad</a>
+        <a href="#recetas">Recetas</a>
+      </nav>
+
+      <form class="header-search" role="search" onsubmit="handleSearchSubmit(event)">
+        <div class="search-field-wrap">
+          <label for="site-search" class="search-label">Buscar sabor o receta</label>
+          <div class="search-input-box">
+            <input
+              id="site-search"
+              class="search-input"
+              type="search"
+              placeholder="Ej. Fresa, 320 g, pancakes"
+              oninput="handleSearchInput(this.value)"
+              autocomplete="off"
+            >
+            <button
+              type="button"
+              id="search-clear-btn"
+              class="search-clear-btn"
+              aria-label="Limpiar búsqueda"
+              onclick="clearSearch()"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="search-submit-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span>Buscar</span>
+        </button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Barra de resultados de búsqueda en vivo -->
+  <div id="search-results-bar" class="search-results-bar" aria-live="polite">
+    <div class="container search-results-inner">
+      <div class="search-results-head">
+        <p id="search-results-summary" class="search-results-title"></p>
+        <button type="button" class="btn-secondary" onclick="clearSearch()">Cerrar búsqueda</button>
+      </div>
+      <div id="search-results-list" class="search-results-list"></div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero + Selector interactivo de producto -->
+    <section class="band hero-band">
+      <div class="container">
+        <div class="headline-stack">
+          <p class="eyebrow">Portafolio oficial de mermeladas</p>
+          <h1>Pulpa de fruta natural para cada mesa.</h1>
+          <p class="lede">
+            Descubre los cinco sabores reales de Mermeladas San Jorge —Fresa, Durazno, Mora, Frutos Rojos y Piña— en envases pensados para disfrutar todos los días.
+          </p>
+          <div class="cta-row">
+            <a href="#sabores" class="btn-primary">Explorar sabores</a>
+            <a href="#recetas" class="link-more">Ver recetas con mermelada</a>
+          </div>
+        </div>
+
+        <div class="tile stage-tile reveal-item" aria-label="Explorador interactivo de sabores y presentaciones">
+          <div class="stage-visual">
+            <div id="pack-svg-mount"></div>
+            <div id="stage-caption" class="stage-caption-pill">Fresa · Doypack con tapa 200 g</div>
+          </div>
+
+          <div class="stage-controls">
+            <div>
+              <p class="control-group-label">1. Elige un sabor oficial</p>
+              <div class="pill-row" role="group" aria-label="Sabores oficiales">
+                <button type="button" class="selector-pill" data-flavor="fresa" aria-pressed="true" onclick="selectFlavor('fresa')">
+                  <span class="flavor-dot dot-fresa" aria-hidden="true"></span>
+                  <span>Fresa</span>
+                </button>
+                <button type="button" class="selector-pill" data-flavor="durazno" aria-pressed="false" onclick="selectFlavor('durazno')">
+                  <span class="flavor-dot dot-durazno" aria-hidden="true"></span>
+                  <span>Durazno</span>
+                </button>
+                <button type="button" class="selector-pill" data-flavor="mora" aria-pressed="false" onclick="selectFlavor('mora')">
+                  <span class="flavor-dot dot-mora" aria-hidden="true"></span>
+                  <span>Mora</span>
+                </button>
+                <button type="button" class="selector-pill" data-flavor="frutos" aria-pressed="false" onclick="selectFlavor('frutos')">
+                  <span class="flavor-dot dot-frutos" aria-hidden="true"></span>
+                  <span>Frutos Rojos</span>
+                </button>
+                <button type="button" class="selector-pill" data-flavor="pina" aria-pressed="false" onclick="selectFlavor('pina')">
+                  <span class="flavor-dot dot-pina" aria-hidden="true"></span>
+                  <span>Piña</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <p class="control-group-label">2. Elige la presentación real</p>
+              <div class="pill-row" role="group" aria-label="Presentaciones reales">
+                <button type="button" class="selector-pill" data-pack="doypack-200" aria-pressed="true" onclick="selectPack('doypack-200')">Doypack 200 g</button>
+                <button type="button" class="selector-pill" data-pack="frasco-320" aria-pressed="false" onclick="selectPack('frasco-320')">Frasco 320 g</button>
+                <button type="button" class="selector-pill" data-pack="doypack-500" aria-pressed="false" onclick="selectPack('doypack-500')">Doypack 500 g</button>
+                <button type="button" class="selector-pill" data-pack="doypack-1000" aria-pressed="false" onclick="selectPack('doypack-1000')">Doypack 1 kg</button>
+              </div>
+            </div>
+
+            <div class="stage-readout" aria-live="polite">
+              <h2 id="readout-title" class="stage-readout-title">Mermelada de Fresa · Doypack con tapa 200 g</h2>
+              <p id="readout-desc" class="stage-readout-desc">
+                Dulzura clásica y aroma fresco con pulpa natural de fresa. Formato práctico con tapa dosificadora resellable para desayunos diarios y loncheras.
+              </p>
+              <div class="stage-meta-row">
+                <span id="readout-servings" class="meta-chip">10 porciones de 20 g</span>
+                <span id="readout-closure" class="meta-chip">Pouch con tapa resellable</span>
+                <span id="readout-pairing" class="meta-chip">Ideal en tostadas y pancakes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Sabores Oficiales -->
+    <section id="sabores" class="band alt">
+      <div class="container">
+        <div class="headline-stack">
+          <p class="eyebrow">Sabores oficiales</p>
+          <h2>Cinco variedades fieles a la fruta.</h2>
+          <p class="lede">
+            Nuestra línea se concentra en cinco sabores clásicos preparados con pulpa natural, textura untable y equilibrio entre dulzor y acidez.
+          </p>
+        </div>
+
+        <div class="flavors-grid">
+          <button type="button" class="tile is-interactive flavor-card is-selected reveal-item" data-flavor-card="fresa" onclick="selectFlavorAndScroll('fresa')">
+            <span class="flavor-badge badge-fresa">
+              <span class="flavor-dot dot-fresa" aria-hidden="true"></span>
+              Clásico favorito
+            </span>
+            <h3>Fresa</h3>
+            <p>Aroma intenso y dulzor amable con trocitos suaves de fruta. Indispensable sobre pan tostado, pancakes y batidos lácteos.</p>
+            <span class="flavor-card-action">Ver en el visualizador ›</span>
+          </button>
+
+          <button type="button" class="tile is-interactive flavor-card reveal-item" data-flavor-card="durazno" onclick="selectFlavorAndScroll('durazno')">
+            <span class="flavor-badge badge-durazno">
+              <span class="flavor-dot dot-durazno" aria-hidden="true"></span>
+              Suave y dorado
+            </span>
+            <h3>Durazno</h3>
+            <p>Notas aterciopeladas y frescura equilibrada que combinan con yogurt natural, hojaldres, crepes y panes integrales.</p>
+            <span class="flavor-card-action">Ver en el visualizador ›</span>
+          </button>
+
+          <button type="button" class="tile is-interactive flavor-card reveal-item" data-flavor-card="mora" onclick="selectFlavorAndScroll('mora')">
+            <span class="flavor-badge badge-mora">
+              <span class="flavor-dot dot-mora" aria-hidden="true"></span>
+              Carácter andino
+            </span>
+            <h3>Mora</h3>
+            <p>Sabor profundo y ligeramente ácido de mora madura. Realza tortas de yogurt, quesos frescos, galletas y postres fríos.</p>
+            <span class="flavor-card-action">Ver en el visualizador ›</span>
+          </button>
+
+          <button type="button" class="tile is-interactive flavor-card reveal-item" data-flavor-card="frutos" onclick="selectFlavorAndScroll('frutos')">
+            <span class="flavor-badge badge-frutos">
+              <span class="flavor-dot dot-frutos" aria-hidden="true"></span>
+              Mezcla frutal
+            </span>
+            <h3>Frutos Rojos</h3>
+            <p>Armonía vibrante de bayas rojas con acidez delicada, pensada para tostadas francesas, coberturas y desayunos completos.</p>
+            <span class="flavor-card-action">Ver en el visualizador ›</span>
+          </button>
+
+          <button type="button" class="tile is-interactive flavor-card reveal-item" data-flavor-card="pina" onclick="selectFlavorAndScroll('pina')">
+            <span class="flavor-badge badge-pina">
+              <span class="flavor-dot dot-pina" aria-hidden="true"></span>
+              Toque tropical
+            </span>
+            <h3>Piña</h3>
+            <p>Frescura tropical brillante con cuerpo jugoso; excelente para repostería casera, rellenos horneados y contrastes agridulces.</p>
+            <span class="flavor-card-action">Ver en el visualizador ›</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Presentaciones Reales -->
+    <section id="presentaciones" class="band">
+      <div class="container">
+        <div class="headline-stack">
+          <p class="eyebrow">Presentaciones reales</p>
+          <h2>Cuatro formatos diseñados para tu ritmo.</h2>
+          <p class="lede">
+            Elige entre tres bolsas Doypack con tapa dosificadora para servir sin derrames o el tradicional frasco de vidrio hermético para conservar en la mesa.
+          </p>
+        </div>
+
+        <div class="presentations-grid">
+          <div class="card-wrapper reveal-item">
+            <button type="button" class="tile is-interactive pres-card is-selected" data-pack-card="doypack-200" onclick="selectPackAndScroll('doypack-200')">
+              <div class="pres-card-inner">
+                <span class="pres-weight">200 g</span>
+                <span class="pres-type">Doypack con tapa</span>
+              </div>
+              <p class="pres-desc">Formato compacto y ligero, fácil de guardar en la nevera o llevar en la lonchera diaria.</p>
+              <span class="pres-servings">Rinde aprox. 10 porciones (20 g)</span>
+            </button>
+          </div>
+
+          <div class="card-wrapper reveal-item">
+            <button type="button" class="tile is-interactive pres-card" data-pack-card="frasco-320" onclick="selectPackAndScroll('frasco-320')">
+              <div class="pres-card-inner">
+                <span class="pres-weight">320 g</span>
+                <span class="pres-type">Frasco de vidrio</span>
+              </div>
+              <p class="pres-desc">Presentación clásica con tapa metálica giratoria que preserva la frescura y permite reutilizar el envase.</p>
+              <span class="pres-servings">Rinde aprox. 16 porciones (20 g)</span>
+            </button>
+          </div>
+
+          <div class="card-wrapper reveal-item">
+            <button type="button" class="tile is-interactive pres-card" data-pack-card="doypack-500" onclick="selectPackAndScroll('doypack-500')">
+              <div class="pres-card-inner">
+                <span class="pres-weight">500 g</span>
+                <span class="pres-type">Doypack con tapa</span>
+              </div>
+              <p class="pres-desc">Equilibrio ideal para hogares activos: dosificación limpia directamente sobre el pan o las recetas.</p>
+              <span class="pres-servings">Rinde aprox. 25 porciones (20 g)</span>
+            </button>
+          </div>
+
+          <div class="card-wrapper reveal-item">
+            <button type="button" class="tile is-interactive pres-card" data-pack-card="doypack-1000" onclick="selectPackAndScroll('doypack-1000')">
+              <div class="pres-card-inner">
+                <span class="pres-weight">1 kg</span>
+                <span class="pres-type">Doypack con tapa</span>
+              </div>
+              <p class="pres-desc">Mayor rendimiento para familias numerosas, desayunos de fin de semana y repostería frecuente.</p>
+              <span class="pres-servings">Rinde aprox. 50 porciones (20 g)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="tile table-tile reveal-item">
+          <h3 class="table-title">Comparativa de presentaciones oficiales San Jorge</h3>
+          <table class="spec-table">
+            <thead>
+              <tr>
+                <th>Presentación</th>
+                <th>Contenido neto</th>
+                <th>Tipo de empaque</th>
+                <th>Porciones (20 g)</th>
+                <th>Uso recomendado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Doypack 200 g</td>
+                <td>200 g</td>
+                <td>Pouch flexible con tapa rosca</td>
+                <td>10</td>
+                <td>Consumo individual y loncheras</td>
+              </tr>
+              <tr>
+                <td>Frasco 320 g</td>
+                <td>320 g</td>
+                <td>Frasco de vidrio con tapa hermética</td>
+                <td>16</td>
+                <td>Mesa familiar y conservación clásica</td>
+              </tr>
+              <tr>
+                <td>Doypack 500 g</td>
+                <td>500 g</td>
+                <td>Pouch flexible con tapa rosca</td>
+                <td>25</td>
+                <td>Desayunos diarios y postres en casa</td>
+              </tr>
+              <tr>
+                <td>Doypack 1 kg</td>
+                <td>1.000 g</td>
+                <td>Pouch flexible con tapa rosca</td>
+                <td>50</td>
+                <td>Familias grandes y repostería</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección concisa de Calidad, Pulpa Natural y Versatilidad -->
+    <section id="calidad" class="band alt">
+      <div class="container">
+        <div class="headline-stack">
+          <p class="eyebrow">Calidad y tradición</p>
+          <h2>Fruta seleccionada, textura impecable y mil usos.</h2>
+          <p class="lede">
+            Cada envase de Mermeladas San Jorge combina fruta natural con el respaldo de calidad alimentaria de Levapan para acompañar preparaciones dulces y saladas.
+          </p>
+        </div>
+
+        <div class="figures-row">
+          <div class="tile figure reveal-item">
+            <div class="label">Sabores oficiales</div>
+            <div class="value">5</div>
+            <div class="caption">Fresa, Durazno, Mora, Frutos Rojos y Piña</div>
+          </div>
+          <div class="tile figure reveal-item">
+            <div class="label">Presentaciones reales</div>
+            <div class="value">4</div>
+            <div class="caption">Doypack 200 g, 500 g, 1 kg y Vidrio 320 g</div>
+          </div>
+          <div class="tile figure reveal-item">
+            <div class="label">Porción de referencia</div>
+            <div class="value">20 g</div>
+            <div class="caption">Medida práctica para untar o glasear</div>
+          </div>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="tile pillar-card reveal-item">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22c4-4 6-7.5 6-11a6 6 0 1 0-12 0c0 3.5 2 7 6 11z"></path>
+                <path d="M12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+              </svg>
+            </div>
+            <h3>Pulpa de fruta natural</h3>
+            <p>Elaboradas con pulpa seleccionada que conserva el color vivo, el aroma genuino y una consistencia untable que no se escurre.</p>
+          </div>
+
+          <div class="tile pillar-card reveal-item">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+            <h3>Calidad hermética</h3>
+            <p>Tanto el frasco de vidrio de 320 g como los empaques Doypack con tapa protegen el producto frente a la humedad y mantienen su frescura tras abrirlo.</p>
+          </div>
+
+          <div class="tile pillar-card reveal-item">
+            <div class="pillar-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+              </svg>
+            </div>
+            <h3>Versatilidad culinaria</h3>
+            <p>Ideal para tostadas y pancakes de la mañana, pero también para batidos cremosos, rellenos de tortas caseras y glaseados rápidos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catálogo reducido de recetas principales con mermelada -->
+    <section id="recetas" class="band">
+      <div class="container">
+        <div class="headline-stack">
+          <p class="eyebrow">Recetas principales</p>
+          <h2>Cuatro ideas prácticas para cocinar con mermelada.</h2>
+          <p class="lede">
+            Selección inspirada en el recetario tradicional San Jorge. Elige una preparación para ajustar sus porciones y seguir el paso a paso.
+          </p>
+        </div>
+
+        <div class="recipe-filters" role="group" aria-label="Filtrar recetas por ocasión">
+          <button type="button" class="filter-pill" data-recipe-filter="todas" aria-pressed="true" onclick="filterRecipes('todas')">Todas las recetas (4)</button>
+          <button type="button" class="filter-pill" data-recipe-filter="desayuno" aria-pressed="false" onclick="filterRecipes('desayuno')">Desayunos y bebidas</button>
+          <button type="button" class="filter-pill" data-recipe-filter="postres" aria-pressed="false" onclick="filterRecipes('postres')">Postres y horneados</button>
+        </div>
+
+        <div class="recipes-layout">
+          <div id="recipes-grid" class="recipes-grid">
+            <button type="button" class="tile is-interactive recipe-card is-selected" data-recipe-id="tostadas" data-category="postres desayuno" onclick="selectRecipe('tostadas')">
+              <div class="recipe-meta-top">
+                <span>30 min · Intermedio</span>
+                <span>Postres y desayunos</span>
+              </div>
+              <h3>Tostadas francesas</h3>
+              <p>Rebanadas doradas en mezcla cremosa de huevo y leche, terminadas con un baño tibio de mermelada.</p>
+              <div class="recipe-pairing">
+                <span class="flavor-badge badge-frutos">Frutos Rojos o Fresa</span>
+                <span class="recipe-open-label">Ver receta ›</span>
+              </div>
+            </button>
+
+            <button type="button" class="tile is-interactive recipe-card" data-recipe-id="torta" data-category="postres" onclick="selectRecipe('torta')">
+              <div class="recipe-meta-top">
+                <span>30 min · Intermedio</span>
+                <span>Repostería</span>
+              </div>
+              <h3>Torta de yogurt con mermelada</h3>
+              <p>Bizcocho húmedo de yogurt natural cubierto con una capa brillante de mermelada de fruta.</p>
+              <div class="recipe-pairing">
+                <span class="flavor-badge badge-mora">Mora o Durazno</span>
+                <span class="recipe-open-label">Ver receta ›</span>
+              </div>
+            </button>
+
+            <button type="button" class="tile is-interactive recipe-card" data-recipe-id="batido" data-category="desayuno" onclick="selectRecipe('batido')">
+              <div class="recipe-meta-top">
+                <span>10 min · Fácil</span>
+                <span>Bebidas rápidas</span>
+              </div>
+              <h3>Batido con mermelada y tostada</h3>
+              <p>Bebida fresca y cremosa endulzada naturalmente con pulpa de mermelada, acompañada de tostada crocante.</p>
+              <div class="recipe-pairing">
+                <span class="flavor-badge badge-fresa">Fresa o Mora</span>
+                <span class="recipe-open-label">Ver receta ›</span>
+              </div>
+            </button>
+
+            <button type="button" class="tile is-interactive recipe-card" data-recipe-id="pancakes" data-category="desayuno postres" onclick="selectRecipe('pancakes')">
+              <div class="recipe-meta-top">
+                <span>20 min · Fácil</span>
+                <span>Desayunos</span>
+              </div>
+              <h3>Pancakes con mermelada</h3>
+              <p>Torre esponjosa de pancakes caseros servida con fruta fresca y mermelada San Jorge entre capas.</p>
+              <div class="recipe-pairing">
+                <span class="flavor-badge badge-fresa">Fresa o Piña</span>
+                <span class="recipe-open-label">Ver receta ›</span>
+              </div>
+            </button>
+          </div>
+
+          <div id="recipes-empty" class="empty-state">
+            <p>No hay recetas que coincidan con el filtro seleccionado.</p>
+            <button type="button" class="btn-primary" onclick="filterRecipes('todas')">Mostrar todas las recetas</button>
+          </div>
+
+          <!-- Panel interactivo inline de preparación -->
+          <article id="recipe-detail-panel" class="recipe-detail-panel" aria-live="polite">
+            <div class="recipe-detail-header">
+              <div>
+                <span id="detail-badge" class="flavor-badge badge-frutos">Sugerencia: Mermelada de Frutos Rojos o Fresa</span>
+                <h3 id="detail-title" class="recipe-detail-title">Tostadas francesas con mermelada</h3>
+              </div>
+              <div class="portion-controls" role="group" aria-label="Ajustar porciones de la receta">
+                <span class="portion-label">Porciones:</span>
+                <button type="button" class="portion-btn" data-servings="2" aria-pressed="false" onclick="setServings(2)">2</button>
+                <button type="button" class="portion-btn" data-servings="4" aria-pressed="true" onclick="setServings(4)">4</button>
+                <button type="button" class="portion-btn" data-servings="6" aria-pressed="false" onclick="setServings(6)">6</button>
+              </div>
+            </div>
+
+            <div>
+              <h4 class="detail-subhead">Ingredientes (marca conforme avanzas)</h4>
+              <ul id="detail-ingredients" class="ingredient-list"></ul>
+            </div>
+
+            <div>
+              <h4 class="detail-subhead">Preparación paso a paso</h4>
+              <ol id="detail-steps" class="steps-list"></ol>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contacto">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 class="footer-heading">Mermeladas San Jorge</h3>
+          <p class="footer-text">
+            Sabores reales: Fresa, Durazno, Mora, Frutos Rojos y Piña.
+          </p>
+          <p class="footer-text">
+            Presentaciones oficiales: Doypack con tapa de 200 g, 500 g y 1 kg, y Frasco de vidrio de 320 g.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Servicio al cliente</h3>
+          <p class="footer-text">Bogotá: 601 307 - 8265</p>
+          <p class="footer-text">Línea nacional: 01 8000 930 - 096</p>
+          <p class="footer-text">WhatsApp: 300 848 - 9219</p>
+          <p class="footer-text">Correo: hablemos@levapan.com</p>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Sede principal</h3>
+          <p class="footer-text">Carrera 7 # 71-52 Oficina 1301</p>
+          <p class="footer-text">Edificio Los Venados — Bogotá, Colombia</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>LEVAPAN — Portafolio San Jorge</span>
+        <span>Fuente de referencia: Catálogo de recetas e identidad de marca San Jorge (sanjorge.co)</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const FLAVORS = {
+      fresa: {
+        id: `fresa`,
+        name: `Fresa`,
+        desc: `Dulzura clásica y aroma fresco con pulpa natural de fresa. Textura suave y brillante ideal para untar cada mañana.`,
+        pairing: `Ideal en tostadas, batidos y pancakes`,
+        colorVar: `var(--flavor-fresa)`,
+        softVar: `var(--flavor-fresa-soft)`,
+        inkVar: `var(--flavor-fresa-ink)`,
+        badgeClass: `badge-fresa`
+      },
+      durazno: {
+        id: `durazno`,
+        name: `Durazno`,
+        desc: `Sabor aterciopelado y dorado con equilibrio natural entre dulce y fresco. Acompaña muy bien yogures, panes integrales y tortas.`,
+        pairing: `Ideal en torta de yogurt y panes`,
+        colorVar: `var(--flavor-durazno)`,
+        softVar: `var(--flavor-durazno-soft)`,
+        inkVar: `var(--flavor-durazno-ink)`,
+        badgeClass: `badge-durazno`
+      },
+      mora: {
+        id: `mora`,
+        name: `Mora`,
+        desc: `Carácter frutal intenso y toque ácido propio de la mora madura. Aporta contraste vibrante a preparaciones lácteas y horneadas.`,
+        pairing: `Ideal en tortas de yogurt y quesos`,
+        colorVar: `var(--flavor-mora)`,
+        softVar: `var(--flavor-mora-soft)`,
+        inkVar: `var(--flavor-mora-ink)`,
+        badgeClass: `badge-mora`
+      },
+      frutos: {
+        id: `frutos`,
+        name: `Frutos Rojos`,
+        desc: `Combinación armónica de bayas rojas con frescura frutal equilibrada. Versátil para tostadas francesas, galletas y desayunos.`,
+        pairing: `Ideal en tostadas francesas y crepes`,
+        colorVar: `var(--flavor-frutos)`,
+        softVar: `var(--flavor-frutos-soft)`,
+        inkVar: `var(--flavor-frutos-ink)`,
+        badgeClass: `badge-frutos`
+      },
+      pina: {
+        id: `pina`,
+        name: `Piña`,
+        desc: `Perfil tropical luminoso y jugoso que aporta frescura inmediata a pancakes, hojaldres, galletas y preparaciones agridulces.`,
+        pairing: `Ideal en pancakes, rellenos y hojaldres`,
+        colorVar: `var(--flavor-pina)`,
+        softVar: `var(--flavor-pina-soft)`,
+        inkVar: `var(--flavor-pina-ink)`,
+        badgeClass: `badge-pina`
+      }
+    };
+
+    const PACKS = {
+      'doypack-200': {
+        id: `doypack-200`,
+        shortName: `Doypack 200 g`,
+        fullName: `Doypack con tapa 200 g`,
+        weightLabel: `200 g`,
+        servings: `10 porciones de 20 g`,
+        closure: `Pouch con tapa resellable`,
+        type: `doypack`,
+        scale: 0.84,
+        note: `Formato compacto para consumo diario y loncheras.`
+      },
+      'frasco-320': {
+        id: `frasco-320`,
+        shortName: `Frasco 320 g`,
+        fullName: `Frasco de vidrio 320 g`,
+        weightLabel: `320 g`,
+        servings: `16 porciones de 20 g`,
+        closure: `Vidrio con tapa metálica hermética`,
+        type: `jar`,
+        scale: 0.94,
+        note: `Presentación tradicional de mesa en envase reutilizable.`
+      },
+      'doypack-500': {
+        id: `doypack-500`,
+        shortName: `Doypack 500 g`,
+        fullName: `Doypack con tapa 500 g`,
+        weightLabel: `500 g`,
+        servings: `25 porciones de 20 g`,
+        closure: `Pouch con tapa resellable`,
+        type: `doypack`,
+        scale: 0.98,
+        note: `Tamaño familiar práctico para dosificar sin cuchara.`
+      },
+      'doypack-1000': {
+        id: `doypack-1000`,
+        shortName: `Doypack 1 kg`,
+        fullName: `Doypack con tapa 1 kg`,
+        weightLabel: `1 kg`,
+        servings: `50 porciones de 20 g`,
+        closure: `Pouch familiar con tapa resellable`,
+        type: `doypack`,
+        scale: 1.08,
+        note: `Alto rendimiento pensado para repostería y familias grandes.`
+      }
+    };
+
+    const RECIPES = {
+      tostadas: {
+        id: `tostadas`,
+        title: `Tostadas francesas con mermelada`,
+        suggestion: `Sugerencia: Mermelada de Frutos Rojos o Fresa San Jorge (Frasco 320 g)`,
+        badgeClass: `badge-frutos`,
+        baseServings: 4,
+        ingredients: [
+          { qty: 8, unit: `rebanadas`, item: `de pan brioche o pan tajado grueso` },
+          { qty: 3, unit: `unidades`, item: `huevos frescos` },
+          { qty: 240, unit: `ml`, item: `de leche entera o bebida vegetal` },
+          { qty: 120, unit: `g`, item: `de Mermelada de Frutos Rojos o Fresa San Jorge` },
+          { qty: 30, unit: `g`, item: `de mantequilla para dorar en sartén` },
+          { qty: 1, unit: `cdta`, item: `de esencia de vainilla y una pizca de canela` }
+        ],
+        steps: [
+          `Bate los huevos junto con la leche, la esencia de vainilla y la canela en un recipiente amplio hasta integrar por completo.`,
+          `Sumerge cada rebanada de pan durante 10 segundos por lado para que absorba la mezcla sin deshacerse.`,
+          `Derrite la mantequilla en sartén a fuego medio y dora las tostadas 2 a 3 minutos por cada cara hasta lograr bordes crujientes.`,
+          `Sirve tibias con una porción generosa de Mermelada de Frutos Rojos o Fresa San Jorge encima.`
+        ]
+      },
+      torta: {
+        id: `torta`,
+        title: `Torta de yogurt con mermelada`,
+        suggestion: `Sugerencia: Mermelada de Mora o Durazno San Jorge (Doypack 500 g)`,
+        badgeClass: `badge-mora`,
+        baseServings: 4,
+        ingredients: [
+          { qty: 180, unit: `g`, item: `de yogurt natural sin azúcar` },
+          { qty: 3, unit: `unidades`, item: `huevos a temperatura ambiente` },
+          { qty: 200, unit: `g`, item: `de harina de trigo tamizada` },
+          { qty: 140, unit: `g`, item: `de azúcar blanca o morena` },
+          { qty: 80, unit: `ml`, item: `de aceite vegetal suave` },
+          { qty: 160, unit: `g`, item: `de Mermelada de Mora o Durazno San Jorge` }
+        ],
+        steps: [
+          `Precalienta el horno a 180 °C y engrasa ligeramente un molde redondo mediano.`,
+          `Bate los huevos con el azúcar hasta aclarar la mezcla; incorpora el yogurt natural y el aceite en forma de hilo.`,
+          `Integra la harina con una cucharadita de polvo para hornear mediante movimientos envolventes.`,
+          `Hornea de 28 a 30 minutos hasta que al insertar un palillo salga limpio. Deja entibiar y cubre con Mermelada de Mora o Durazno San Jorge.`
+        ]
+      },
+      batido: {
+        id: `batido`,
+        title: `Batido con mermelada y tostada`,
+        suggestion: `Sugerencia: Mermelada de Fresa o Mora San Jorge (Doypack 200 g)`,
+        badgeClass: `badge-fresa`,
+        baseServings: 4,
+        ingredients: [
+          { qty: 500, unit: `ml`, item: `de leche fría o yogurt bebible natural` },
+          { qty: 100, unit: `g`, item: `de Mermelada de Fresa o Mora San Jorge` },
+          { qty: 1, unit: `unidad`, item: `banano maduro en rodajas (opcional para cremosidad)` },
+          { qty: 8, unit: `cubos`, item: `de hielo` },
+          { qty: 4, unit: `rebanadas`, item: `de pan tostado con capa fina de mermelada` }
+        ],
+        steps: [
+          `Coloca en la licuadora la leche fría, el banano en rodajas, el hielo y la Mermelada de Fresa o Mora San Jorge.`,
+          `Licúa durante 30 segundos a velocidad alta hasta conseguir textura homogénea y espumosa.`,
+          `Tuesta ligeramente las rebanadas de pan y úntalas con un poco más de mermelada.`,
+          `Sirve el batido de inmediato en vasos fríos junto con las tostadas.`
+        ]
+      },
+      pancakes: {
+        id: `pancakes`,
+        title: `Pancakes con mermelada`,
+        suggestion: `Sugerencia: Mermelada de Fresa o Piña San Jorge (Doypack 200 g o 500 g)`,
+        badgeClass: `badge-fresa`,
+        baseServings: 4,
+        ingredients: [
+          { qty: 200, unit: `g`, item: `de harina de trigo` },
+          { qty: 250, unit: `ml`, item: `de leche` },
+          { qty: 2, unit: `unidades`, item: `huevos` },
+          { qty: 30, unit: `g`, item: `de mantequilla derretida` },
+          { qty: 120, unit: `g`, item: `de Mermelada de Fresa o Piña San Jorge` }
+        ],
+        steps: [
+          `Mezcla la harina con una cucharadita de polvo para hornear y una pizca de sal en un tazón.`,
+          `Aparte bate los huevos con la leche y la mantequilla derretida; vierte sobre los secos y mezcla sin sobrebatir.`,
+          `Vierte porciones en sartén antiadherente caliente; voltea cuando aparezcan burbujas en la superficie.`,
+          `Apila los pancakes tibios intercalando cucharadas de Mermelada de Fresa o Piña San Jorge.`
+        ]
+      }
+    };
+
+    let activeFlavor = `fresa`;
+    let activePack = `doypack-200`;
+    let activeRecipe = `tostadas`;
+    let activeServings = 4;
+
+    function buildPackSvg(flavorKey, packKey) {
+      const f = FLAVORS[flavorKey] || FLAVORS.fresa;
+      const p = PACKS[packKey] || PACKS['doypack-200'];
+      const scale = p.scale;
+
+      if (p.type === `jar`) {
+        return `
+          <svg width="260" height="280" viewBox="0 0 260 280" role="img" aria-label="Frasco de vidrio Mermelada San Jorge ${f.name} ${p.weightLabel}">
+            <g transform="translate(130 145) scale(${scale}) translate(-130 -145)">
+              <!-- Sombra base -->
+              <ellipse cx="130" cy="248" rx="68" ry="11" fill="var(--surface-container-high)" />
+              <!-- Cuerpo del frasco de vidrio -->
+              <rect x="64" y="76" width="132" height="168" rx="22" fill="var(--pack-glass-base)" stroke="var(--pack-pouch-stroke)" stroke-width="2" />
+              <!-- Contenido de mermelada -->
+              <rect x="70" y="92" width="120" height="145" rx="16" fill="${f.colorVar}" />
+              <!-- Brillo vidrio -->
+              <rect x="77" y="88" width="14" height="142" rx="7" fill="var(--pack-glass-shine)" opacity="0.55" />
+              <!-- Cuello y tapa metálica -->
+              <rect x="78" y="62" width="104" height="16" rx="4" fill="var(--pack-glass-base)" stroke="var(--pack-pouch-stroke)" stroke-width="1.5" />
+              <rect x="72" y="38" width="116" height="28" rx="8" fill="var(--pack-lid-gold)" stroke="var(--pack-lid-dark)" stroke-width="2" />
+              <line x1="76" y1="48" x2="184" y2="48" stroke="var(--pack-lid-dark)" stroke-width="1.2" opacity="0.5" />
+              <!-- Etiqueta central San Jorge -->
+              <rect x="74" y="114" width="112" height="94" rx="12" fill="var(--pack-pouch-base)" />
+              <rect x="74" y="182" width="112" height="26" rx="0" fill="${f.softVar}" />
+              <g transform="translate(130 140) rotate(-5)">
+                <ellipse cx="0" cy="0" rx="40" ry="16" fill="var(--brand-yellow)" stroke="var(--brand-blue-ink)" stroke-width="1.5" />
+                <text x="0" y="5" text-anchor="middle" fill="var(--brand-blue-ink)" font-family="Inter Tight, sans-serif" font-weight="800" font-style="italic" font-size="13.5">San Jorge</text>
+              </g>
+              <text x="130" y="172" text-anchor="middle" fill="var(--on-surface)" font-family="Inter, sans-serif" font-weight="700" font-size="13">${f.name}</text>
+              <text x="130" y="199" text-anchor="middle" fill="${f.inkVar}" font-family="Inter, sans-serif" font-weight="700" font-size="12">${p.weightLabel} · Vidrio</text>
+            </g>
+          </svg>
+        `;
+      }
+
+      return `
+        <svg width="260" height="280" viewBox="0 0 260 280" role="img" aria-label="Doypack con tapa Mermelada San Jorge ${f.name} ${p.weightLabel}">
+          <g transform="translate(130 148) scale(${scale}) translate(-130 -148)">
+            <!-- Sombra base -->
+            <ellipse cx="130" cy="252" rx="76" ry="11" fill="var(--surface-container-high)" />
+            <!-- Boquilla y tapa azul -->
+            <rect x="116" y="42" width="28" height="14" rx="2" fill="var(--pack-pouch-shade)" />
+            <rect x="111" y="24" width="38" height="22" rx="5" fill="var(--primary)" />
+            <line x1="118" y1="27" x2="118" y2="43" stroke="var(--on-primary)" stroke-width="1.5" opacity="0.4" />
+            <line x1="130" y1="27" x2="130" y2="43" stroke="var(--on-primary)" stroke-width="1.5" opacity="0.4" />
+            <line x1="142" y1="27" x2="142" y2="43" stroke="var(--on-primary)" stroke-width="1.5" opacity="0.4" />
+            <!-- Cuerpo flexible Doypack -->
+            <path d="M 68 58 Q 130 50 192 58 L 204 232 Q 204 246 184 248 L 76 248 Q 56 246 56 232 Z" fill="var(--pack-pouch-base)" stroke="var(--pack-pouch-stroke)" stroke-width="2" />
+            <!-- Banda inferior de color frutal -->
+            <path d="M 59 188 L 201 188 L 204 232 Q 204 246 184 248 L 76 248 Q 56 246 56 232 Z" fill="${f.colorVar}" />
+            <!-- Pliegue lateral de volumen -->
+            <path d="M 68 62 L 62 232" stroke="var(--pack-pouch-shade)" stroke-width="3" opacity="0.55" />
+            <!-- Emblema San Jorge amarillo -->
+            <g transform="translate(130 106) rotate(-5)">
+              <ellipse cx="0" cy="0" rx="46" ry="19" fill="var(--brand-yellow)" stroke="var(--brand-blue-ink)" stroke-width="1.7" />
+              <path d="M 33 -9 Q 42 -11 44 -2 Q 38 1 33 -4 Z" fill="var(--brand-leaf-green)" />
+              <text x="-1" y="5.5" text-anchor="middle" fill="var(--brand-blue-ink)" font-family="Inter Tight, sans-serif" font-weight="800" font-style="italic" font-size="15">San Jorge</text>
+            </g>
+            <!-- Denominación y sabor -->
+            <text x="130" y="148" text-anchor="middle" fill="var(--on-surface-variant)" font-family="Inter, sans-serif" font-weight="600" font-size="11">MERMELADA DE</text>
+            <text x="130" y="170" text-anchor="middle" fill="var(--on-surface)" font-family="Inter Tight, sans-serif" font-weight="700" font-size="22">${f.name}</text>
+            <!-- Peso en la banda de fruta -->
+            <text x="130" y="216" text-anchor="middle" fill="var(--on-primary)" font-family="Inter Tight, sans-serif" font-weight="700" font-size="20">${p.weightLabel}</text>
+            <text x="130" y="235" text-anchor="middle" fill="var(--on-primary)" font-family="Inter, sans-serif" font-weight="500" font-size="10.5" opacity="0.92">Doypack con tapa</text>
+          </g>
+        </svg>
+      `;
+    }
+
+    function renderStage() {
+      const f = FLAVORS[activeFlavor] || FLAVORS.fresa;
+      const p = PACKS[activePack] || PACKS['doypack-200'];
+
+      const svgMount = document.getElementById(`pack-svg-mount`);
+      if (svgMount) svgMount.innerHTML = buildPackSvg(activeFlavor, activePack);
+
+      const cap = document.getElementById(`stage-caption`);
+      if (cap) cap.textContent = `${f.name} · ${p.fullName}`;
+
+      const title = document.getElementById(`readout-title`);
+      if (title) title.textContent = `Mermelada de ${f.name} · ${p.fullName}`;
+
+      const desc = document.getElementById(`readout-desc`);
+      if (desc) desc.textContent = `${f.desc} ${p.note}`;
+
+      const servings = document.getElementById(`readout-servings`);
+      if (servings) servings.textContent = p.servings;
+
+      const closure = document.getElementById(`readout-closure`);
+      if (closure) closure.textContent = p.closure;
+
+      const pairing = document.getElementById(`readout-pairing`);
+      if (pairing) pairing.textContent = f.pairing;
+
+      document.querySelectorAll(`[data-flavor]`).forEach((btn) => {
+        btn.setAttribute(`aria-pressed`, btn.dataset.flavor === activeFlavor ? `true` : `false`);
+      });
+      document.querySelectorAll(`[data-pack]`).forEach((btn) => {
+        btn.setAttribute(`aria-pressed`, btn.dataset.pack === activePack ? `true` : `false`);
+      });
+      document.querySelectorAll(`[data-flavor-card]`).forEach((card) => {
+        card.classList.toggle(`is-selected`, card.dataset.flavorCard === activeFlavor);
+      });
+      document.querySelectorAll(`[data-pack-card]`).forEach((card) => {
+        card.classList.toggle(`is-selected`, card.dataset.packCard === activePack);
+      });
+    }
+
+    function selectFlavor(flavorKey) {
+      if (!FLAVORS[flavorKey]) return;
+      activeFlavor = flavorKey;
+      renderStage();
+    }
+
+    function selectPack(packKey) {
+      if (!PACKS[packKey]) return;
+      activePack = packKey;
+      renderStage();
+    }
+
+    function selectFlavorAndScroll(flavorKey) {
+      selectFlavor(flavorKey);
+      const target = document.getElementById(`pack-svg-mount`);
+      if (target) target.scrollIntoView({ behavior: `smooth`, block: `center` });
+    }
+
+    function selectPackAndScroll(packKey) {
+      selectPack(packKey);
+      const target = document.getElementById(`pack-svg-mount`);
+      if (target) target.scrollIntoView({ behavior: `smooth`, block: `center` });
+    }
+
+    function filterRecipes(category) {
+      document.querySelectorAll(`[data-recipe-filter]`).forEach((btn) => {
+        btn.setAttribute(`aria-pressed`, btn.dataset.recipeFilter === category ? `true` : `false`);
+      });
+
+      const cards = document.querySelectorAll(`[data-recipe-id]`);
+      let visibleCount = 0;
+      let firstVisibleId = null;
+
+      cards.forEach((card) => {
+        const cats = card.dataset.category || ``;
+        const show = category === `todas` || cats.includes(category);
+        card.style.display = show ? `` : `none`;
+        if (show) {
+          visibleCount += 1;
+          if (!firstVisibleId) firstVisibleId = card.dataset.recipeId;
+        }
+      });
+
+      const empty = document.getElementById(`recipes-empty`);
+      if (empty) empty.classList.toggle(`is-visible`, visibleCount === 0);
+
+      const activeCard = document.querySelector(`[data-recipe-id="${activeRecipe}"]`);
+      if (activeCard && activeCard.style.display === `none` && firstVisibleId) {
+        selectRecipe(firstVisibleId);
+      }
+    }
+
+    function renderRecipeDetail() {
+      const r = RECIPES[activeRecipe] || RECIPES.tostadas;
+      const ratio = activeServings / r.baseServings;
+
+      const badge = document.getElementById(`detail-badge`);
+      if (badge) {
+        badge.className = `flavor-badge ${r.badgeClass}`;
+        badge.textContent = r.suggestion;
+      }
+
+      const title = document.getElementById(`detail-title`);
+      if (title) title.textContent = r.title;
+
+      const ingList = document.getElementById(`detail-ingredients`);
+      if (ingList) {
+        ingList.innerHTML = r.ingredients.map((ing, idx) => {
+          const scaled = Math.round(ing.qty * ratio * 10) / 10;
+          const formatted = Number.isInteger(scaled) ? `${scaled}` : `${scaled}`.replace(`.`, `,`);
+          return `
+            <li class="ingredient-item">
+              <input type="checkbox" id="ing-${idx}" onchange="toggleIngredient(this)">
+              <label for="ing-${idx}"><span>${formatted} ${ing.unit} ${ing.item}</span></label>
+            </li>
+          `;
+        }).join(``);
+      }
+
+      const stepsList = document.getElementById(`detail-steps`);
+      if (stepsList) {
+        stepsList.innerHTML = r.steps.map((step) => `<li>${step}</li>`).join(``);
+      }
+
+      document.querySelectorAll(`[data-recipe-id]`).forEach((card) => {
+        card.classList.toggle(`is-selected`, card.dataset.recipeId === activeRecipe);
+      });
+
+      document.querySelectorAll(`[data-servings]`).forEach((btn) => {
+        btn.setAttribute(`aria-pressed`, Number(btn.dataset.servings) === activeServings ? `true` : `false`);
+      });
+    }
+
+    function toggleIngredient(checkbox) {
+      if (!checkbox) return;
+      const row = checkbox.closest(`.ingredient-item`);
+      if (row) row.classList.toggle(`is-checked`, checkbox.checked);
+    }
+
+    function selectRecipe(recipeId) {
+      if (!RECIPES[recipeId]) return;
+      activeRecipe = recipeId;
+      renderRecipeDetail();
+    }
+
+    function setServings(num) {
+      activeServings = num;
+      renderRecipeDetail();
+    }
+
+    /* Buscador interactivo en encabezado */
+    const SEARCH_INDEX = [
+      { label: `Sabor Fresa`, keywords: `fresa roja clasica dulce`, action: () => { selectFlavor(`fresa`); jumpTo(`#sabores`); } },
+      { label: `Sabor Durazno`, keywords: `durazno melocoton dorado`, action: () => { selectFlavor(`durazno`); jumpTo(`#sabores`); } },
+      { label: `Sabor Mora`, keywords: `mora morado andina`, action: () => { selectFlavor(`mora`); jumpTo(`#sabores`); } },
+      { label: `Sabor Frutos Rojos`, keywords: `frutos rojos bayas`, action: () => { selectFlavor(`frutos`); jumpTo(`#sabores`); } },
+      { label: `Sabor Piña`, keywords: `pina piña tropical amarilla`, action: () => { selectFlavor(`pina`); jumpTo(`#sabores`); } },
+      { label: `Doypack 200 g`, keywords: `doypack pouch tapa 200 200g`, action: () => { selectPack(`doypack-200`); jumpTo(`#presentaciones`); } },
+      { label: `Frasco de vidrio 320 g`, keywords: `frasco vidrio 320 320g tapa`, action: () => { selectPack(`frasco-320`); jumpTo(`#presentaciones`); } },
+      { label: `Doypack 500 g`, keywords: `doypack pouch tapa 500 500g`, action: () => { selectPack(`doypack-500`); jumpTo(`#presentaciones`); } },
+      { label: `Doypack 1 kg`, keywords: `doypack pouch tapa 1kg 1000 familiar`, action: () => { selectPack(`doypack-1000`); jumpTo(`#presentaciones`); } },
+      { label: `Receta: Tostadas francesas`, keywords: `tostadas francesas pan desayuno`, action: () => { filterRecipes(`todas`); selectRecipe(`tostadas`); jumpTo(`#recetas`); } },
+      { label: `Receta: Torta de yogurt con mermelada`, keywords: `torta yogurt pastel postre`, action: () => { filterRecipes(`todas`); selectRecipe(`torta`); jumpTo(`#recetas`); } },
+      { label: `Receta: Batido con mermelada`, keywords: `batido bebida leche tostada`, action: () => { filterRecipes(`todas`); selectRecipe(`batido`); jumpTo(`#recetas`); } },
+      { label: `Receta: Pancakes con mermelada`, keywords: `pancakes panqueques desayuno`, action: () => { filterRecipes(`todas`); selectRecipe(`pancakes`); jumpTo(`#recetas`); } }
+    ];
+
+    function normalizeText(str) {
+      return str.toLowerCase().normalize(`NFD`).replace(/[\u0300-\u036f]/g, ``).trim();
+    }
+
+    function jumpTo(selector) {
+      const el = document.querySelector(selector);
+      if (el) el.scrollIntoView({ behavior: `smooth`, block: `start` });
+    }
+
+    function handleSearchInput(rawValue) {
+      const clearBtn = document.getElementById(`search-clear-btn`);
+      const bar = document.getElementById(`search-results-bar`);
+      const summary = document.getElementById(`search-results-summary`);
+      const list = document.getElementById(`search-results-list`);
+      if (!bar || !summary || !list) return;
+
+      const q = normalizeText(rawValue);
+      if (clearBtn) clearBtn.classList.toggle(`is-visible`, q.length > 0);
+
+      if (!q) {
+        bar.classList.remove(`is-open`);
+        list.innerHTML = ``;
+        return;
+      }
+
+      const matches = SEARCH_INDEX.filter((item) => {
+        const haystack = normalizeText(`${item.label} ${item.keywords}`);
+        return haystack.includes(q);
+      });
+
+      bar.classList.add(`is-open`);
+      if (matches.length === 0) {
+        summary.textContent = `No se encontraron coincidencias para "${rawValue.trim()}". Prueba con Fresa, Durazno, Mora, Frutos Rojos, Piña, 320 g o Pancakes.`;
+        list.innerHTML = ``;
+        return;
+      }
+
+      summary.textContent = `${matches.length} resultado${matches.length === 1 ? `` : `s`} para "${rawValue.trim()}":`;
+      list.innerHTML = ``;
+      matches.forEach((item) => {
+        const btn = document.createElement(`button`);
+        btn.type = `button`;
+        btn.className = `search-hit-pill`;
+        btn.textContent = item.label;
+        btn.onclick = () => item.action();
+        list.appendChild(btn);
+      });
+    }
+
+    function handleSearchSubmit(event) {
+      event.preventDefault();
+      const input = document.getElementById(`site-search`);
+      if (!input) return;
+      handleSearchInput(input.value);
+      const firstHit = document.querySelector(`#search-results-list .search-hit-pill`);
+      if (firstHit) firstHit.click();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById(`site-search`);
+      if (input) input.value = ``;
+      handleSearchInput(``);
+    }
+
+    function initScrollReveal() {
+      const items = document.querySelectorAll(`.reveal-item`);
+      if (!(`IntersectionObserver` in window)) {
+        items.forEach((el) => el.classList.add(`is-visible`));
+        return;
+      }
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(`is-visible`);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      items.forEach((el) => observer.observe(el));
+    }
+
+    document.addEventListener(`DOMContentLoaded`, () => {
+      renderStage();
+      renderRecipeDetail();
+      initScrollReveal();
+    });
+  </script>
+</body>
+</html>
